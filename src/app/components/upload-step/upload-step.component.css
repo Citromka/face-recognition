@@ -1,0 +1,28 @@
+.example-card {
+  max-width: 400px;
+  margin-bottom: 1rem;
+}
+
+.uploadFileContainer {
+  background-image: url("src/assets/svg-cloud-and-upload-icon-1.svg");
+  background-repeat: no-repeat;
+  background-size: 10rem;
+  background-position: center;
+  height: 12rem;
+  width: 80%;
+  margin: 20px auto;
+  border: 2px dashed #1C8ADB;
+  border-radius: 10px;
+}
+
+.uploadFileContainer:hover {
+  cursor: pointer;
+  background-color: #9ecbec;
+  opacity: 0.8;
+}
+
+.mat-card .mat-divider-horizontal.mat-divider-inset {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+

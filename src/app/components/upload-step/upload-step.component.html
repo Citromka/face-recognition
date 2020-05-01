@@ -1,0 +1,29 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Drag a file into the holder</mat-card-title>
+    <mat-card-subtitle>Or browse for a file</mat-card-subtitle>
+  </mat-card-header>
+  <div class="uploadFileContainer">
+    <input hidden type="file">
+  </div>
+  <mat-divider inset="inset"></mat-divider>
+  <mat-card-content>
+    <form>
+      <mat-form-field>
+        <mat-label>Copy a URL here</mat-label>
+        <input matInput placeholder="Example url">
+        <mat-error>
+          Please enter a valid url
+        </mat-error>
+        <mat-error>
+          Url is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+    <mat-divider inset="inset"></mat-divider>
+    <button mat-button color="primary">
+      <mat-icon>file_upload</mat-icon>
+      Browse a file
+    </button>
+  </mat-card-content>
+</mat-card>
