@@ -11,11 +11,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
+import { ResultStepComponent } from './components/result-step/result-step.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UploadStepComponent
+    UploadStepComponent,
+    ResultStepComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import {MatDividerModule} from '@angular/material/divider';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
