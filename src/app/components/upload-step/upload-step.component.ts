@@ -31,7 +31,8 @@ export class UploadStepComponent {
 
     const imageUrl = 'https://upload.wikimedia.org/wikipedia/hu/3/36/Tatay_S%C3%A1ndor_1982.jpg';
     this.faceService.recognize(imageUrl).subscribe((data: any) => {
-      const {gender, age, emotion, glasses, hair} = data[0].faceAttributes;
+      const {faceAttributes, faceRectangle} = data[0];
+      const {gender, age, emotion, glasses, hair} = faceAttributes;
       const image: Image = {
         id: null,
         url: imageUrl,
@@ -41,7 +42,8 @@ export class UploadStepComponent {
         glasses,
         hair: hair.bald > 0.5 ? 'bald' : firstOfReverseSort(hair.hairColor.map((color) => {
           return [color.color, color.confidence];
-        }))
+        })),
+        faceRectangle
       };
 
       this.imageService.addOrUpdateImage(image);
