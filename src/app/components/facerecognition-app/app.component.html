@@ -1,7 +1,7 @@
-<mat-horizontal-stepper linear>
+<mat-horizontal-stepper linear #stepper>
   <mat-step label="Step 1">
     <ng-template matStepLabel>Upload a picture</ng-template>
-    <app-upload-step></app-upload-step>
+    <app-upload-step [stepper]="stepper"></app-upload-step>
   </mat-step>
   <mat-step label="Step 1">
     <ng-template matStepLabel>Check the results</ng-template>

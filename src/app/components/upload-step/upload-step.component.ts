@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import {FaceService} from '../../services/face.service';
 import {Image} from '../../models/image.type';
 import {ImageService} from '../../services/image.service';
+import {MatStepper} from '@angular/material/stepper';
 
 @Component({
   selector: 'app-upload-step',
@@ -10,8 +11,7 @@ import {ImageService} from '../../services/image.service';
 })
 
 export class UploadStepComponent {
-  title = 'upload';
-
+  @Input() stepper: MatStepper;
   /*
   urlFormControl = new FormControl('', [
     Validators.required,
@@ -19,10 +19,13 @@ export class UploadStepComponent {
   ]);
    */
 
+  waitingForResult = false;
+
   constructor(private faceService: FaceService, private imageService: ImageService) {
   }
 
   nextButtonHandler() {
+    this.waitingForResult = true;
     const firstOfReverseSort = (array) => {
       return array.sort((a: [string, number], b: [string, number]) => {
         return b[1] - a[1];
@@ -47,6 +50,10 @@ export class UploadStepComponent {
       };
 
       this.imageService.addOrUpdateImage(image);
+
+      this.waitingForResult = false;
+      this.stepper.next();
+
     });
   }
 }

@@ -15,6 +15,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { ResultStepComponent } from './components/result-step/result-step.component';
 import {MatTableModule} from '@angular/material/table';
 
+
 @NgModule({
   declarations: [
     AppComponent,

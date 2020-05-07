@@ -17,10 +17,16 @@ export class ImageService {
     return of(this.images);
   }
 
+  getLast() {
+    return of(this.images[this.images.length - 1]);
+  }
+
   getById(id: number) {
-    return {...this.images.find((element) => {
-      return element.id === id;
-    })};
+    return {
+      ...this.images.find((element) => {
+        return element.id === id;
+      })
+    };
   }
 
   private load() {

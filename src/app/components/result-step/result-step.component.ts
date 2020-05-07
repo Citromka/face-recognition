@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {ImageService} from '../../services/image.service';
+import {Image} from '../../models/image.type';
 
 @Component({
   selector: 'app-result-step',
@@ -44,10 +46,25 @@ export class ResultStepComponent implements OnInit {
     }
   }];
 
-  constructor() {
+  current: Image;
+  mappedProperties;
+  displayedColumns = ['property', 'value'];
+
+  constructor(private imageService: ImageService) {
   }
 
   ngOnInit(): void {
+    this.imageService.getLast().subscribe((data: Image) => {
+      this.current = data;
+      const {gender, age, hair, emotion, glasses} = data;
+      this.mappedProperties = [
+        {name: 'gender', value: gender},
+        {name: 'age', value: age},
+        {name: 'hair', value: hair},
+        {name: 'emotion', value: emotion},
+        {name: 'glasses', value: glasses}
+      ];
+    });
   }
 
 }
