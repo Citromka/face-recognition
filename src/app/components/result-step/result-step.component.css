@@ -1,4 +1,13 @@
-.example-card {
+.result-card {
   max-width: 400px;
+  margin-bottom: 1rem;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-card .mat-divider-horizontal.mat-divider-inset {
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }

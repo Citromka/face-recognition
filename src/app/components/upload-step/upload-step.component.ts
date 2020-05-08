@@ -3,6 +3,7 @@ import {FaceService} from '../../services/face.service';
 import {Image} from '../../models/image.type';
 import {ImageService} from '../../services/image.service';
 import {MatStepper} from '@angular/material/stepper';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-upload-step',
@@ -12,14 +13,19 @@ import {MatStepper} from '@angular/material/stepper';
 
 export class UploadStepComponent {
   @Input() stepper: MatStepper;
-  /*
+
+  // Ez egy RFC-ből van, elvileg ez a hivatalos módszer az azonosításra
+  // private validatorPattern = '^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?';
+  private validatorPattern = '^(https?:\/\/).*';
+
+  debugger;
   urlFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('.*'),
+    Validators.pattern(this.validatorPattern)
   ]);
-   */
 
   waitingForResult = false;
+  imageUrl = '';
 
   constructor(private faceService: FaceService, private imageService: ImageService) {
   }

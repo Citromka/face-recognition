@@ -14,6 +14,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import { ResultStepComponent } from './components/result-step/result-step.component';
 import {MatTableModule} from '@angular/material/table';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -33,7 +34,9 @@ import {MatTableModule} from '@angular/material/table';
     MatIconModule,
     MatDividerModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

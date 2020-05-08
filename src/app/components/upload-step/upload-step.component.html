@@ -1,4 +1,4 @@
-<mat-card class="example-card">
+<mat-card class="upload-card">
   <mat-card-header>
     <mat-card-title>Drag a file into the holder</mat-card-title>
     <mat-card-subtitle>Or browse for a file</mat-card-subtitle>
@@ -11,11 +11,11 @@
     <form>
       <mat-form-field>
         <mat-label>Copy a URL here</mat-label>
-        <input matInput placeholder="Example url">
-        <mat-error>
+        <input [formControl]="urlFormControl" name="URL" [(ngModel)]="imageUrl" matInput placeholder="Example url">
+        <mat-error *ngIf="urlFormControl.hasError('pattern') && !urlFormControl.hasError('required')">
           Please enter a valid url
         </mat-error>
-        <mat-error>
+        <mat-error *ngIf="urlFormControl.hasError('required')">
           Url is <strong>required</strong>
         </mat-error>
       </mat-form-field>
