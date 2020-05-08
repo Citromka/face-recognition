@@ -15,6 +15,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { ResultStepComponent } from './components/result-step/result-step.component';
 import {MatTableModule} from '@angular/material/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FilestackModule} from '@filestack/angular';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatTableModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FilestackModule
   ],
   providers: [],
   bootstrap: [AppComponent]

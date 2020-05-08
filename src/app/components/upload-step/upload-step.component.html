@@ -21,9 +21,11 @@
       </mat-form-field>
     </form>
     <mat-divider inset="inset"></mat-divider>
-    <button mat-button color="primary">
+    <button mat-button color="primary" (click)="upload.click()">
       <mat-icon>file_upload</mat-icon>
       Browse a file
+      <input accept="image/*" type="file" style="display: none;" #upload name="upload"
+             (change)="handleFileInput($event.target.files)">
     </button>
   </mat-card-content>
 </mat-card>
