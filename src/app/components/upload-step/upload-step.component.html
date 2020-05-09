@@ -3,8 +3,8 @@
     <mat-card-title>Drag a file into the holder</mat-card-title>
     <mat-card-subtitle>Or browse for a file</mat-card-subtitle>
   </mat-card-header>
-  <div class="uploadFileContainer">
-    <input hidden type="file">
+  <div class="uploadFileContainer" (click)="fileDragInput.click()" appFileDragDrop (fileDropped)="handleFileInput($event)">
+    <input hidden type="file" #fileDragInput (change)="handleFileInput($event.target.files)">
   </div>
   <mat-divider inset="inset"></mat-divider>
   <mat-card-content>

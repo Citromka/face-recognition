@@ -48,12 +48,10 @@ export class UploadStepComponent implements OnInit {
 
 
   onUploadSuccess(res: object) {
-    debugger;
     console.log('###uploadSuccess', res);
   }
 
   onUploadError(err: any) {
-    debugger;
     console.log('###uploadError', err);
   }
 
@@ -94,11 +92,10 @@ export class UploadStepComponent implements OnInit {
         faceRectangle
       };
 
-      this.imageService.addOrUpdateImage(image);
-
-      this.waitingForResult = false;
-      this.stepper.next();
-
+      this.imageService.addOrUpdateImage(image).subscribe(() => {
+        this.waitingForResult = false;
+        this.stepper.next();
+      });
     });
   }
 }

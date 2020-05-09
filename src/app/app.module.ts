@@ -16,13 +16,15 @@ import { ResultStepComponent } from './components/result-step/result-step.compon
 import {MatTableModule} from '@angular/material/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FilestackModule} from '@filestack/angular';
+import { FileDragDropDirective } from './directives/file-drag-drop.directive';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     UploadStepComponent,
-    ResultStepComponent
+    ResultStepComponent,
+    FileDragDropDirective
   ],
   imports: [
     BrowserModule,

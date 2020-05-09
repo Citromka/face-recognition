@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {of} from 'rxjs';
+import {Observable, of, timer} from 'rxjs';
 import {Image} from '../models/image.type';
 
 @Injectable({
@@ -35,6 +35,7 @@ export class ImageService {
 
   private save() {
     localStorage.setItem('images', JSON.stringify(this.images));
+    return timer(200);
   }
 
   addOrUpdateImage(image: Image) {
