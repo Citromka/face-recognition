@@ -20,5 +20,10 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <div class="pager" *ngIf="current && current.faces.length > 0">
+      <button mat-button color="primary" (click)="faceChanged(-1)">Prev face</button>
+      <button mat-button color="primary" (click)="faceChanged(1)">Next face</button>
+    </div>
+
   </mat-card-content>
 </mat-card>

@@ -52,6 +52,7 @@ export class ResultStepComponent implements OnChanges {
   current: Image;
   mappedProperties;
   displayedColumns = ['property', 'value'];
+  private currentFaceIndex: number = 0;
 
   @ViewChild('canvas', { static : true })
   canvas: ElementRef<HTMLCanvasElement>;
@@ -67,20 +68,24 @@ export class ResultStepComponent implements OnChanges {
         this.current = data;
         // debugger;
         if (data.faces.length > 0) {
-          const {gender, age, hair, emotion, glasses} = data.faces[0];
-          this.mappedProperties = [
-            {name: 'gender', value: gender},
-            {name: 'age', value: age},
-            {name: 'hair', value: hair},
-            {name: 'emotion', value: emotion},
-            {name: 'glasses', value: glasses}
-          ];
+          this.fillTable();
         } else {
           this.mappedProperties = [{name: 'error', value: 'no faces detected :('}];
         }
         this.drawImage();
       });
     }
+  }
+
+  private fillTable() {
+    const {gender, age, hair, emotion, glasses} = this.current.faces[this.currentFaceIndex];
+    this.mappedProperties = [
+      {name: 'gender', value: gender},
+      {name: 'age', value: age},
+      {name: 'hair', value: hair},
+      {name: 'emotion', value: emotion},
+      {name: 'glasses', value: glasses}
+    ];
   }
 
   private drawImage() {
@@ -97,9 +102,22 @@ export class ResultStepComponent implements OnChanges {
   }
 
   private drawRectangle() {
-    const faceRect = this.current.faces[0].faceRectangle;
-    this.context.strokeStyle = '#21b6d8';
+
     this.context.lineWidth = 15;
-    this.context.strokeRect(faceRect.left, faceRect.top, faceRect.width, faceRect.height);
+    this.current.faces.map((it, index) => {
+      const faceRect = it.faceRectangle;
+      if (index === this.currentFaceIndex) {
+        this.context.strokeStyle = '#f4db33';
+      } else {
+        this.context.strokeStyle = '#21b6d8';
+      }
+      this.context.strokeRect(faceRect.left, faceRect.top, faceRect.width, faceRect.height);
+    });
+  }
+
+  faceChanged(direction: number) {
+    this.currentFaceIndex = (this.currentFaceIndex + direction) % this.current.faces.length;
+    this.drawImage();
+    this.fillTable();
   }
 }

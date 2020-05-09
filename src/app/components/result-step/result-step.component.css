@@ -11,3 +11,9 @@ table {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+
+.pager {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
