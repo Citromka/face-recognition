@@ -17,14 +17,19 @@ import {MatTableModule} from '@angular/material/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FilestackModule} from '@filestack/angular';
 import { FileDragDropDirective } from './directives/file-drag-drop.directive';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { AppRoutingModule } from './app-routing.module';
+import { NewPageComponent } from './components/new-page/new-page.component';
+import { ViewPageComponent } from './components/view-page/view-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UploadStepComponent,
     ResultStepComponent,
-    FileDragDropDirective
+    FileDragDropDirective,
+    NewPageComponent,
+    ViewPageComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,9 @@ import { FileDragDropDirective } from './directives/file-drag-drop.directive';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FilestackModule
+    FilestackModule,
+    MatToolbarModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

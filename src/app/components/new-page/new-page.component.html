@@ -1,0 +1,13 @@
+<mat-horizontal-stepper linear #stepper>
+  <mat-step label="Step 1">
+    <ng-template matStepLabel>Upload a picture</ng-template>
+    <app-upload-step [stepper]="stepper"></app-upload-step>
+  </mat-step>
+  <mat-step label="Step 1">
+    <ng-template matStepLabel>Check the results</ng-template>
+    <app-result-step [active]="stepper.selectedIndex == 1"></app-result-step>
+    <div>
+      <button mat-flat-button color="primary" matStepperPrevious>Back</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
