@@ -5,7 +5,7 @@
   </mat-step>
   <mat-step label="Step 1">
     <ng-template matStepLabel>Check the results</ng-template>
-    <app-result-step></app-result-step>
+    <app-result-step [active]="stepper.selectedIndex == 1"></app-result-step>
     <div>
       <button mat-flat-button color="primary" matStepperPrevious>Back</button>
     </div>

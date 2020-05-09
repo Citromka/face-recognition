@@ -5,6 +5,7 @@ import {ImageService} from '../../services/image.service';
 import {MatStepper} from '@angular/material/stepper';
 import {FormControl, Validators} from '@angular/forms';
 import {FilestackService} from '@filestack/angular';
+import {Face} from '../../models/face.type';
 
 @Component({
   selector: 'app-upload-step',
@@ -77,19 +78,26 @@ export class UploadStepComponent implements OnInit {
     };
 
     this.faceService.recognize(imageUrl).subscribe((data: any) => {
-      const {faceAttributes, faceRectangle} = data[0];
-      const {gender, age, emotion, glasses, hair} = faceAttributes;
+
+      const faces: Face[] = data.map((it) => {
+        const {faceAttributes, faceRectangle} = it;
+        const {gender, age, emotion, glasses, hair} = faceAttributes;
+        return {
+          gender,
+          age,
+          emotion: firstOfReverseSort(Object.entries(emotion)),
+          glasses,
+          hair: hair.bald > 0.5 ? 'bald' : firstOfReverseSort(hair.hairColor.map((color) => {
+            return [color.color, color.confidence];
+          })),
+          faceRectangle
+        };
+      });
+
       const image: Image = {
         id: null,
         url: imageUrl,
-        gender,
-        age,
-        emotion: firstOfReverseSort(Object.entries(emotion)),
-        glasses,
-        hair: hair.bald > 0.5 ? 'bald' : firstOfReverseSort(hair.hairColor.map((color) => {
-          return [color.color, color.confidence];
-        })),
-        faceRectangle
+        faces
       };
 
       this.imageService.addOrUpdateImage(image).subscribe(() => {

@@ -24,7 +24,7 @@ export class FaceService {
       params: {
         returnFaceId: 'true',
         returnFaceLandmarks: 'false',
-        returnFaceAttributes: 'age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise'
+        returnFaceAttributes: 'age,gender,smile,glasses,emotion,hair'
       },
       reportProgress: false,
       responseType: 'json',

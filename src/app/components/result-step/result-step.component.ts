@@ -1,13 +1,16 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {ImageService} from '../../services/image.service';
 import {Image} from '../../models/image.type';
+import {MatStepper} from '@angular/material/stepper';
 
 @Component({
   selector: 'app-result-step',
   templateUrl: './result-step.component.html',
   styleUrls: ['./result-step.component.css']
 })
-export class ResultStepComponent implements OnInit {
+export class ResultStepComponent implements OnChanges {
+
+  @Input() active: boolean;
 
   private sample = [{
     faceId: 'dacf0dcd-135b-41ec-b5d7-648acd241571',
@@ -57,20 +60,27 @@ export class ResultStepComponent implements OnInit {
   constructor(private imageService: ImageService) {
   }
 
-  ngOnInit(): void {
-    this.context = this.canvas.nativeElement.getContext('2d');
-    this.imageService.getLast().subscribe((data: Image) => {
-      this.current = data;
-      const {gender, age, hair, emotion, glasses} = data;
-      this.mappedProperties = [
-        {name: 'gender', value: gender},
-        {name: 'age', value: age},
-        {name: 'hair', value: hair},
-        {name: 'emotion', value: emotion},
-        {name: 'glasses', value: glasses}
-      ];
-      this.drawImage();
-    });
+  ngOnChanges(): void {
+    if (this.active) {
+      this.context = this.canvas.nativeElement.getContext('2d');
+      this.imageService.getLast().subscribe((data: Image) => {
+        this.current = data;
+        // debugger;
+        if (data.faces.length > 0) {
+          const {gender, age, hair, emotion, glasses} = data.faces[0];
+          this.mappedProperties = [
+            {name: 'gender', value: gender},
+            {name: 'age', value: age},
+            {name: 'hair', value: hair},
+            {name: 'emotion', value: emotion},
+            {name: 'glasses', value: glasses}
+          ];
+        } else {
+          this.mappedProperties = [{name: 'error', value: 'no faces detected :('}];
+        }
+        this.drawImage();
+      });
+    }
   }
 
   private drawImage() {
@@ -80,12 +90,14 @@ export class ResultStepComponent implements OnInit {
       this.canvas.nativeElement.width = img.width;
       this.canvas.nativeElement.height = img.height;
       this.context.drawImage(img, 0, 0);
-      this.drawRectangle();
+      if (this.current.faces.length > 0) {
+        this.drawRectangle();
+      }
     };
   }
 
   private drawRectangle() {
-    const faceRect = this.current.faceRectangle;
+    const faceRect = this.current.faces[0].faceRectangle;
     this.context.strokeStyle = '#21b6d8';
     this.context.lineWidth = 15;
     this.context.strokeRect(faceRect.left, faceRect.top, faceRect.width, faceRect.height);
