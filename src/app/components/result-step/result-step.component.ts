@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ImageService} from '../../services/image.service';
 import {Image} from '../../models/image.type';
 
@@ -50,10 +50,15 @@ export class ResultStepComponent implements OnInit {
   mappedProperties;
   displayedColumns = ['property', 'value'];
 
+  @ViewChild('canvas', { static : true })
+  canvas: ElementRef<HTMLCanvasElement>;
+  private context: CanvasRenderingContext2D;
+
   constructor(private imageService: ImageService) {
   }
 
   ngOnInit(): void {
+    this.context = this.canvas.nativeElement.getContext('2d');
     this.imageService.getLast().subscribe((data: Image) => {
       this.current = data;
       const {gender, age, hair, emotion, glasses} = data;
@@ -64,7 +69,25 @@ export class ResultStepComponent implements OnInit {
         {name: 'emotion', value: emotion},
         {name: 'glasses', value: glasses}
       ];
+      this.drawImage();
     });
   }
 
+  private drawImage() {
+    const img = new Image();
+    img.src = this.current.url;
+    img.onload = () => {
+      this.canvas.nativeElement.width = img.width;
+      this.canvas.nativeElement.height = img.height;
+      this.context.drawImage(img, 0, 0);
+      this.drawRectangle();
+    };
+  }
+
+  private drawRectangle() {
+    const faceRect = this.current.faceRectangle;
+    this.context.strokeStyle = '#21b6d8';
+    this.context.lineWidth = 15;
+    this.context.strokeRect(faceRect.left, faceRect.top, faceRect.width, faceRect.height);
+  }
 }
