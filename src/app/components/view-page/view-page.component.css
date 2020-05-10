@@ -1,0 +1,28 @@
+.view-card {
+  max-width: 400px;
+  min-width: 400px;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  margin-left: 2rem;
+}
+
+.mat-card .mat-divider-horizontal.mat-divider-inset {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+table {
+  width: 100%;
+}
+
+.pager {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.card-placer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

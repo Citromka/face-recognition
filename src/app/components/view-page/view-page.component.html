@@ -1,1 +1,43 @@
-<p>view-page works!</p>
+<div class="card-placer">
+  <mat-card class="view-card">
+    <mat-card-header>
+      <mat-card-title>Previous pictures</mat-card-title>
+      <mat-card-subtitle>View them again!</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="pager" *ngIf="images && images.length > 0">
+        <button mat-button color="primary" (click)="pictureChanged(-1)">Prev picture</button>
+        <button mat-button color="primary" (click)="pictureChanged(1)">Next picture</button>
+      </div>
+      <p *ngIf="!images || images && images.length === 0">You did not upload any pictures yet :(</p>
+    </mat-card-content>
+    <canvas #canvas mat-card-image>
+
+    </canvas>
+  </mat-card>
+
+  <mat-card class="view-card">
+    <mat-card-header>
+      <mat-card-title>Face attributes</mat-card-title>
+      <mat-card-subtitle>Are they correct?</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="pager" *ngIf="images && images[currentPictureIndex].faces.length > 0">
+        <button mat-button color="primary" (click)="faceChanged(-1)">Prev face</button>
+        <button mat-button color="primary" (click)="faceChanged(1)">Next face</button>
+      </div>
+      <table mat-table [dataSource]="mappedProperties" class="mat-elevation-z1">
+        <ng-container matColumnDef="property">
+          <th mat-header-cell *matHeaderCellDef> Property </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef> Value </th>
+          <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>

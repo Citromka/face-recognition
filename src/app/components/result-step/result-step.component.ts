@@ -66,7 +66,6 @@ export class ResultStepComponent implements OnChanges {
       this.context = this.canvas.nativeElement.getContext('2d');
       this.imageService.getLast().subscribe((data: Image) => {
         this.current = data;
-        // debugger;
         if (data.faces.length > 0) {
           this.fillTable();
         } else {

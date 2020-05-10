@@ -1,5 +1,10 @@
 <mat-toolbar color="primary" class="mat-elevation-z6">
-    <a routerLink="/new" routerLinkActive="active">New</a>
-    <a routerLink="/view" routerLinkActive="active">View</a>
+  <mat-toolbar-row>
+    <h1>Face recognition</h1>
+    <div class="links">
+      <a mat-button routerLink="/new" routerLinkActive="active">New</a>
+      <a mat-button routerLink="/view" routerLinkActive="active">View</a>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>
