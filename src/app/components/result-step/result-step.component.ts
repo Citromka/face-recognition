@@ -50,9 +50,7 @@ export class ResultStepComponent implements OnChanges {
   }];
 
   current: Image;
-  mappedProperties;
-  displayedColumns = ['property', 'value'];
-  private currentFaceIndex: number = 0;
+  currentFaceIndex: number = 0;
 
   @ViewChild('canvas', { static : true })
   canvas: ElementRef<HTMLCanvasElement>;
@@ -66,25 +64,9 @@ export class ResultStepComponent implements OnChanges {
       this.context = this.canvas.nativeElement.getContext('2d');
       this.imageService.getLast().subscribe((data: Image) => {
         this.current = data;
-        if (data.faces.length > 0) {
-          this.fillTable();
-        } else {
-          this.mappedProperties = [{name: 'error', value: 'no faces detected :('}];
-        }
         this.drawImage();
       });
     }
-  }
-
-  private fillTable() {
-    const {gender, age, hair, emotion, glasses} = this.current.faces[this.currentFaceIndex];
-    this.mappedProperties = [
-      {name: 'gender', value: gender},
-      {name: 'age', value: age},
-      {name: 'hair', value: hair},
-      {name: 'emotion', value: emotion},
-      {name: 'glasses', value: glasses}
-    ];
   }
 
   private drawImage() {
@@ -117,6 +99,5 @@ export class ResultStepComponent implements OnChanges {
   faceChanged(direction: number) {
     this.currentFaceIndex = (this.currentFaceIndex + direction) % this.current.faces.length;
     this.drawImage();
-    this.fillTable();
   }
 }

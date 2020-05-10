@@ -18,16 +18,12 @@ export class ViewPageComponent implements OnInit, OnChanges {
   private context: CanvasRenderingContext2D;
   images: Image[];
   currentPictureIndex = 0;
-  private currentFaceIndex = 0;
-
-  mappedProperties;
-  displayedColumns = ['property', 'value'];
+  currentFaceIndex = 0;
 
   ngOnInit(): void {
     this.context = this.canvas.nativeElement.getContext('2d');
     this.imageService.getAll().subscribe((data: Image[]) => {
       this.images = data;
-      this.fillTable();
       this.drawImage();
     });
   }
@@ -68,32 +64,15 @@ export class ViewPageComponent implements OnInit, OnChanges {
     });
   }
 
-  private fillTable() {
-    if (this.images[this.currentPictureIndex].faces.length > 0) {
-      const {gender, age, hair, emotion, glasses} = this.images[this.currentPictureIndex].faces[this.currentFaceIndex];
-      this.mappedProperties = [
-        {name: 'gender', value: gender},
-        {name: 'age', value: age},
-        {name: 'hair', value: hair},
-        {name: 'emotion', value: emotion},
-        {name: 'glasses', value: glasses}
-      ];
-    } else {
-      this.mappedProperties = [{name: 'error', value: 'no faces detected :('}];
-    }
-  }
-
   pictureChanged(direction: number) {
     this.currentPictureIndex = (this.currentPictureIndex + direction) % this.images.length;
     this.currentFaceIndex = 0;
     this.drawImage();
-    this.fillTable();
   }
 
   faceChanged(direction: number) {
     this.currentFaceIndex = (this.currentFaceIndex + direction) % this.images[this.currentPictureIndex].faces.length;
     this.drawImage();
-    this.fillTable();
   }
 
 }

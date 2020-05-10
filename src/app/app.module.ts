@@ -21,6 +21,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
 import { NewPageComponent } from './components/new-page/new-page.component';
 import { ViewPageComponent } from './components/view-page/view-page.component';
+import { FaceAttributesComponent } from './components/face-attributes/face-attributes.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ViewPageComponent } from './components/view-page/view-page.component';
     ResultStepComponent,
     FileDragDropDirective,
     NewPageComponent,
-    ViewPageComponent
+    ViewPageComponent,
+    FaceAttributesComponent
   ],
   imports: [
     BrowserModule,
