@@ -1,29 +1,35 @@
-<mat-card class="result-card">
-  <mat-card-header>
-    <mat-card-title>Faces found</mat-card-title>
-    <mat-card-subtitle>Is that correct?</mat-card-subtitle>
-  </mat-card-header>
-  <canvas #canvas mat-card-image>
+<div class="card-placer">
+  <mat-card class="result-card">
+    <mat-card-header>
+      <mat-card-title>Faces found</mat-card-title>
+      <mat-card-subtitle>Is that correct?</mat-card-subtitle>
+    </mat-card-header>
+    <canvas #canvas mat-card-image>
+    </canvas>
+  </mat-card>
 
-  </canvas>
-  <mat-divider inset="inset"></mat-divider>
-  <mat-card-content>
-    <table mat-table [dataSource]="mappedProperties" class="mat-elevation-z1">
-      <ng-container matColumnDef="property">
-        <th mat-header-cell *matHeaderCellDef> Property </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-      <ng-container matColumnDef="value">
-        <th mat-header-cell *matHeaderCellDef> Value </th>
-        <td mat-cell *matCellDef="let element"> {{element.value}} </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <div class="pager" *ngIf="current && current.faces.length > 0">
-      <button mat-button color="primary" (click)="faceChanged(-1)">Prev face</button>
-      <button mat-button color="primary" (click)="faceChanged(1)">Next face</button>
-    </div>
-
-  </mat-card-content>
-</mat-card>
+  <mat-card class="result-card">
+    <mat-card-header>
+      <mat-card-title>Face attributes</mat-card-title>
+      <mat-card-subtitle>Are they correct?</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="pager" *ngIf="current && current.faces.length > 0">
+        <button mat-button color="primary" (click)="faceChanged(-1)">Prev face</button>
+        <button mat-button color="primary" (click)="faceChanged(1)">Next face</button>
+      </div>
+      <table mat-table [dataSource]="mappedProperties" class="mat-elevation-z1">
+        <ng-container matColumnDef="property">
+          <th mat-header-cell *matHeaderCellDef> Property</th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef> Value</th>
+          <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>
