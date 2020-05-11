@@ -11,9 +11,7 @@
       </div>
       <p *ngIf="!images || images && images.length === 0">You did not upload any pictures yet :(</p>
     </mat-card-content>
-    <canvas #canvas mat-card-image>
-
-    </canvas>
+    <app-face-image-view [image]="images[currentPictureIndex]" [currentFaceIndex]="currentFaceIndex"></app-face-image-view>
   </mat-card>
 
   <mat-card class="view-card">

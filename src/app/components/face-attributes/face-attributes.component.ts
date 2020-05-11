@@ -18,7 +18,7 @@ export class FaceAttributesComponent implements OnChanges {
   }
 
   ngOnChanges(): void {
-    if (this.current.faces.length > 0) {
+    if (this.current && this.current.faces.length > 0) {
       this.fillTable();
     } else {
       this.mappedProperties = [{name: 'error', value: 'no faces detected :('}];

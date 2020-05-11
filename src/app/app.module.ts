@@ -22,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NewPageComponent } from './components/new-page/new-page.component';
 import { ViewPageComponent } from './components/view-page/view-page.component';
 import { FaceAttributesComponent } from './components/face-attributes/face-attributes.component';
+import { FaceImageViewComponent } from './components/face-image-view/face-image-view.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FaceAttributesComponent } from './components/face-attributes/face-attri
     FileDragDropDirective,
     NewPageComponent,
     ViewPageComponent,
-    FaceAttributesComponent
+    FaceAttributesComponent,
+    FaceImageViewComponent
   ],
   imports: [
     BrowserModule,

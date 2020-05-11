@@ -4,8 +4,7 @@
       <mat-card-title>Faces found</mat-card-title>
       <mat-card-subtitle>Is that correct?</mat-card-subtitle>
     </mat-card-header>
-    <canvas #canvas mat-card-image>
-    </canvas>
+    <app-face-image-view [currentFaceIndex]="currentFaceIndex" [image]="current"></app-face-image-view>
   </mat-card>
 
   <mat-card class="result-card">

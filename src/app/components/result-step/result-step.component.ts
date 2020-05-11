@@ -50,54 +50,20 @@ export class ResultStepComponent implements OnChanges {
   }];
 
   current: Image;
-  currentFaceIndex: number = 0;
-
-  @ViewChild('canvas', { static : true })
-  canvas: ElementRef<HTMLCanvasElement>;
-  private context: CanvasRenderingContext2D;
+  currentFaceIndex = 0;
 
   constructor(private imageService: ImageService) {
   }
 
   ngOnChanges(): void {
     if (this.active) {
-      this.context = this.canvas.nativeElement.getContext('2d');
       this.imageService.getLast().subscribe((data: Image) => {
         this.current = data;
-        this.drawImage();
       });
     }
   }
 
-  private drawImage() {
-    const img = new Image();
-    img.src = this.current.url;
-    img.onload = () => {
-      this.canvas.nativeElement.width = img.width;
-      this.canvas.nativeElement.height = img.height;
-      this.context.drawImage(img, 0, 0);
-      if (this.current.faces.length > 0) {
-        this.drawRectangle();
-      }
-    };
-  }
-
-  private drawRectangle() {
-
-    this.context.lineWidth = 15;
-    this.current.faces.map((it, index) => {
-      const faceRect = it.faceRectangle;
-      if (index === this.currentFaceIndex) {
-        this.context.strokeStyle = '#f4db33';
-      } else {
-        this.context.strokeStyle = '#21b6d8';
-      }
-      this.context.strokeRect(faceRect.left, faceRect.top, faceRect.width, faceRect.height);
-    });
-  }
-
   faceChanged(direction: number) {
     this.currentFaceIndex = (this.currentFaceIndex + direction) % this.current.faces.length;
-    this.drawImage();
   }
 }
