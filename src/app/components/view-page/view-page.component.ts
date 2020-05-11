@@ -13,18 +13,13 @@ export class ViewPageComponent implements OnInit, OnChanges {
   constructor(private imageService: ImageService) {
   }
 
-  @ViewChild('canvas', {static: true})
-  canvas: ElementRef<HTMLCanvasElement>;
-  private context: CanvasRenderingContext2D;
   images: Image[];
   currentPictureIndex = 0;
   currentFaceIndex = 0;
 
   ngOnInit(): void {
-    // this.context = this.canvas.nativeElement.getContext('2d');
     this.imageService.getAll().subscribe((data: Image[]) => {
       this.images = data;
-      // this.drawImage();
     });
   }
 
@@ -32,20 +27,21 @@ export class ViewPageComponent implements OnInit, OnChanges {
     if (this.changed) {
       this.imageService.getAll().subscribe((data: Image[]) => {
         this.images = data;
-        // this.drawImage();
       });
     }
   }
 
   pictureChanged(direction: number) {
-    this.currentPictureIndex = (this.currentPictureIndex + direction) % this.images.length;
+    const step = this.currentPictureIndex + direction < 0 ? this.images.length + direction : this.currentPictureIndex + direction;
+    this.currentPictureIndex = (step) % this.images.length;
     this.currentFaceIndex = 0;
-    // this.drawImage();
   }
 
   faceChanged(direction: number) {
-    this.currentFaceIndex = (this.currentFaceIndex + direction) % this.images[this.currentPictureIndex].faces.length;
-    // this.drawImage();
+    const step =  (this.currentFaceIndex + direction) < 0 ?
+                  (this.images[this.currentPictureIndex].faces.length + direction) :
+                  (this.currentFaceIndex + direction);
+    this.currentFaceIndex = (step) % this.images[this.currentPictureIndex].faces.length;
   }
 
 }

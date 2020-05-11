@@ -64,6 +64,9 @@ export class ResultStepComponent implements OnChanges {
   }
 
   faceChanged(direction: number) {
-    this.currentFaceIndex = (this.currentFaceIndex + direction) % this.current.faces.length;
+    const step =  (this.currentFaceIndex + direction) < 0 ?
+      (this.current.faces.length + direction) :
+      (this.currentFaceIndex + direction);
+    this.currentFaceIndex = (step) % this.current.faces.length;
   }
 }
