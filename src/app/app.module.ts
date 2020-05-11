@@ -23,6 +23,7 @@ import { NewPageComponent } from './components/new-page/new-page.component';
 import { ViewPageComponent } from './components/view-page/view-page.component';
 import { FaceAttributesComponent } from './components/face-attributes/face-attributes.component';
 import { FaceImageViewComponent } from './components/face-image-view/face-image-view.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -35,24 +36,25 @@ import { FaceImageViewComponent } from './components/face-image-view/face-image-
     FaceAttributesComponent,
     FaceImageViewComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatStepperModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatDividerModule,
-    MatTableModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FilestackModule,
-    MatToolbarModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatStepperModule,
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        MatDividerModule,
+        MatTableModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        FilestackModule,
+        MatToolbarModule,
+        AppRoutingModule,
+        MatProgressSpinnerModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

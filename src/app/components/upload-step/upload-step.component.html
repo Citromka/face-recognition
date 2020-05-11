@@ -27,6 +27,7 @@
       <input accept="image/*" type="file" style="display: none;" #upload name="upload"
              (change)="handleFileInput($event.target.files)">
     </button>
+    <mat-progress-spinner mode="indeterminate" *ngIf="waitingForResult"></mat-progress-spinner>
   </mat-card-content>
 </mat-card>
 <div>

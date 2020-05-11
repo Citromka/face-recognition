@@ -29,8 +29,6 @@ export class UploadStepComponent implements OnInit {
   waitingForResult = false;
   imageUrl = '';
   fileToUpload: File = null;
-  onSuccess: any;
-  onError: any;
 
   constructor(private faceService: FaceService,
               private imageService: ImageService,
@@ -40,30 +38,20 @@ export class UploadStepComponent implements OnInit {
   ngOnInit(): void {
     this.apikey = ''; // TODO add filestack api key here
     this.filestackService.init(this.apikey);
-    /*
-    this.onSuccess = (res) => console.log('###onSuccess', res);
-    this.onError = (err) => console.log('###onErr', err);
-
-     */
-  }
-
-
-  onUploadSuccess(res: object) {
-    console.log('###uploadSuccess', res);
-  }
-
-  onUploadError(err: any) {
-    console.log('###uploadError', err);
   }
 
   handleFileInput(files: FileList) {
+    this.waitingForResult = true;
     this.fileToUpload = files.item(0);
     this.uploadFile();
   }
 
   uploadFile() {
     this.filestackService.upload(this.fileToUpload)
-      .subscribe((res: any) => this.imageUrl = res.url);
+      .subscribe((res: any) => {
+        this.imageUrl = res.url;
+        this.waitingForResult = false;
+      });
   }
 
   nextButtonHandler() {
