@@ -28,6 +28,7 @@ export class FileDragDropDirective {
     this.opacity = '1';
   }
 
+  // Emit an event if something (files) were dropped on the view
   @HostListener('drop', ['$event'])
   onDrop(event) {
     event.preventDefault();

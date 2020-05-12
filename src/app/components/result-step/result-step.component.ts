@@ -55,6 +55,7 @@ export class ResultStepComponent implements OnChanges {
   constructor(private imageService: ImageService) {
   }
 
+  // Get the latest image if step was activated
   ngOnChanges(): void {
     if (this.active) {
       this.imageService.getLast().subscribe((data: Image) => {
@@ -63,8 +64,10 @@ export class ResultStepComponent implements OnChanges {
     }
   }
 
+  // Handle navigation between faces
+  // Dir is 1 or -1
   faceChanged(direction: number) {
-    const step =  (this.currentFaceIndex + direction) < 0 ?
+    const step = (this.currentFaceIndex + direction) < 0 ?
       (this.current.faces.length + direction) :
       (this.currentFaceIndex + direction);
     this.currentFaceIndex = (step) % this.current.faces.length;

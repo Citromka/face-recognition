@@ -14,6 +14,8 @@ export class FaceService {
   constructor(private http: HttpClient) {
   }
 
+  // Send a face recognition request to the MS Face API
+  // Input url is the url of the image resource
   recognize(url: string) {
     return this.http.post(this.baseUrl, {url}, {
       headers: {

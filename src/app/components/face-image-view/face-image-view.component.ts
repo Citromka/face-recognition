@@ -18,16 +18,20 @@ export class FaceImageViewComponent implements OnInit, OnChanges {
   constructor() {
   }
 
+  // Initialize the canvas context
   ngOnInit(): void {
     this.context = this.canvas.nativeElement.getContext('2d');
   }
 
+  // If either of the inputs was changed redraw
   ngOnChanges(): void {
     if (this.image) {
       this.drawImage();
     }
   }
 
+  // Preload the image and set canvas size to image size then draw the image
+  // If there are rectangles draw them as well
   private drawImage() {
     const img = new Image();
     img.src = this.image.url;
@@ -41,6 +45,7 @@ export class FaceImageViewComponent implements OnInit, OnChanges {
     };
   }
 
+  // Draw face rectangles, active with yellow the others with blue
   private drawRectangle() {
     this.context.lineWidth = 15;
     this.image.faces.map((it, index) => {

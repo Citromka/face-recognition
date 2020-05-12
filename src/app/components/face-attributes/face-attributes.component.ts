@@ -17,6 +17,8 @@ export class FaceAttributesComponent implements OnChanges {
   constructor() {
   }
 
+  // If any of the inputs is changed refill the table that contains the attributes
+  // If there are no faces then write a sad error message :(
   ngOnChanges(): void {
     if (this.current && this.current.faces.length > 0) {
       this.fillTable();
@@ -25,7 +27,7 @@ export class FaceAttributesComponent implements OnChanges {
     }
   }
 
-
+  // Fill the table with the properties of the current face
   private fillTable() {
     const {gender, age, hair, emotion, glasses} = this.current.faces[this.currentFaceIndex];
     this.mappedProperties = [

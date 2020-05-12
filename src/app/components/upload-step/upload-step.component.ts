@@ -36,17 +36,21 @@ export class UploadStepComponent implements OnInit {
               private filestackService: FilestackService) {
   }
 
+  // Initializing FilestackService
   ngOnInit(): void {
     this.apikey = ''; // TODO add filestack api key here
     this.filestackService.init(this.apikey);
   }
 
+  // If file was selected or dropped, start spinner and uploading
   handleFileInput(files: FileList) {
     this.waitingForResult = true;
     this.fileToUpload = files.item(0);
     this.uploadFile();
   }
 
+  // Use filestackService to upload the file
+  // When response is back set the image url and stop spinner
   uploadFile() {
     this.filestackService.upload(this.fileToUpload)
       .subscribe((res: any) => {
@@ -55,6 +59,9 @@ export class UploadStepComponent implements OnInit {
       });
   }
 
+  // Handle next click: start spinner, then call faceService recognize with the current url
+  // On response transform it to Image model object or save the error message
+  // Save the image to local storage finally
   nextButtonHandler() {
 
     const imageUrl = this.imageUrl;
@@ -68,32 +75,32 @@ export class UploadStepComponent implements OnInit {
 
     this.faceService.recognize(imageUrl).subscribe((data: any) => {
 
-      const faces: Face[] = data.map((it) => {
-        const {faceAttributes, faceRectangle} = it;
-        const {gender, age, emotion, glasses, hair} = faceAttributes;
-        return {
-          gender,
-          age,
-          emotion: firstOfReverseSort(Object.entries(emotion)),
-          glasses,
-          hair: hair.bald > 0.5 ? 'bald' : firstOfReverseSort(hair.hairColor.map((color) => {
-            return [color.color, color.confidence];
-          })),
-          faceRectangle
+        const faces: Face[] = data.map((it) => {
+          const {faceAttributes, faceRectangle} = it;
+          const {gender, age, emotion, glasses, hair} = faceAttributes;
+          return {
+            gender,
+            age,
+            emotion: firstOfReverseSort(Object.entries(emotion)),
+            glasses,
+            hair: hair.bald > 0.5 ? 'bald' : firstOfReverseSort(hair.hairColor.map((color) => {
+              return [color.color, color.confidence];
+            })),
+            faceRectangle
+          };
+        });
+
+        const image: Image = {
+          id: null,
+          url: imageUrl,
+          faces
         };
-      });
 
-      const image: Image = {
-        id: null,
-        url: imageUrl,
-        faces
-      };
-
-      this.imageService.addOrUpdateImage(image).subscribe(() => {
-        this.waitingForResult = false;
-        this.stepper.next();
-      });
-    },
+        this.imageService.addOrUpdateImage(image).subscribe(() => {
+          this.waitingForResult = false;
+          this.stepper.next();
+        });
+      },
       (error) => {
         this.error = error.error.error.message;
         this.waitingForResult = false;
