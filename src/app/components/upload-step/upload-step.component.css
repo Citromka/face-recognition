@@ -26,3 +26,11 @@
   margin-bottom: 1rem;
 }
 
+.error-layout {
+  display: flex;
+  justify-content: space-between;
+}
+
+.error-layout mat-icon {
+  cursor: pointer;
+}

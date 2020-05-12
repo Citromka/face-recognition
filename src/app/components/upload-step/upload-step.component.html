@@ -28,6 +28,12 @@
              (change)="handleFileInput($event.target.files)">
     </button>
     <mat-progress-spinner mode="indeterminate" *ngIf="waitingForResult"></mat-progress-spinner>
+    <div *ngIf="error" class="error-layout">
+      <mat-error>
+        {{error}}
+      </mat-error>
+      <mat-icon color="warn" (click)="error = null">highlight_off</mat-icon>
+    </div>
   </mat-card-content>
 </mat-card>
 <div>

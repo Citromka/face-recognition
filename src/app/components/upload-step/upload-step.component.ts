@@ -29,6 +29,7 @@ export class UploadStepComponent implements OnInit {
   waitingForResult = false;
   imageUrl = '';
   fileToUpload: File = null;
+  error: string = null;
 
   constructor(private faceService: FaceService,
               private imageService: ImageService,
@@ -92,6 +93,10 @@ export class UploadStepComponent implements OnInit {
         this.waitingForResult = false;
         this.stepper.next();
       });
-    });
+    },
+      (error) => {
+        this.error = error.error.error.message;
+        this.waitingForResult = false;
+      });
   }
 }
